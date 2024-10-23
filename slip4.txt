@@ -1,0 +1,79 @@
+Q1
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+typedef struct node
+{
+int info;
+struct node*left,*right;
+} NODE;
+NODE *createbst(NODE *root,int item)
+{
+if(root==NULL)
+{
+root=(NODE *)malloc(sizeof(NODE));
+root->left=root->right=NULL;
+root->info=item;
+return root;
+}
+else
+{
+if(item<root->info)
+root->left=createbst(root->left, item);
+else
+{
+if(item>root->info)
+root->right=createbst(root->right,item);
+else
+printf("Duplicate element is not allowed");
+}
+return root;
+}
+}
+void preorder(NODE *root)
+{
+if(root!=NULL)
+{
+printf("%d\t",root->info);
+preorder(root->left);
+preorder(root->right);
+}
+}
+int main()
+{
+int i,n,choice,item,key;
+NODE *temp,*root=NULL;
+while(1)
+{
+printf("\nBINARY SEARCH TREE");
+printf("\n1.Create bst");
+printf("\n2.Preorder");
+printf("\n3.Exit");
+printf("\nEnter your choice");
+scanf("%d",&choice);
+switch (choice)
+{
+case 1:
+printf("Enter how many nodes you want to create");
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+printf("\nENter the node info");
+scanf("%d",&item);
+root=createbst(root,item);
+}
+break;
+case 2:
+printf("\nPreorder=");
+preorder(root);
+break;
+case 3:
+exit(0);
+default:
+printf("Wrong choice entered....");
+}
+}
+}
+
